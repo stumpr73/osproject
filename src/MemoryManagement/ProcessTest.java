@@ -1,6 +1,8 @@
 package MemoryManagement;
 
-import org.junit.Before;
+import static org.junit.Assert.*;
+
+import org.junit.*;
 
 
 /**
