@@ -11,6 +11,7 @@ public class MMDriver {
 		tree.allocate(p2);
 		tree.deallocate(p2);
 		tree.deallocate(p);
+		*
 		*/
 		TreeTest treeTest = new TreeTest();
 		ProcessTest processTest = new ProcessTest();

@@ -177,3 +177,4 @@ public class TreeTest
         assertEquals(t4, t1.findSuitableChild(p2));
     }
 }
+
