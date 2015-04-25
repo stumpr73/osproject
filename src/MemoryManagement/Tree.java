@@ -5,7 +5,7 @@ package MemoryManagement;
  * which is an integer that corresponds to the amount of memory.  The size left field
  * is used to describe how much memory is left in the child nodes below it.
  * 
- * @author Ryan Stump, John Masterson, Dave Ferrara, Justin Gulutz
+ * @author Ryan Stump, John Masterson, David Ferrara, Justin Gulutz
  *
  */
 public class Tree {
@@ -22,12 +22,60 @@ public class Tree {
 	 * @param p -the parent of the node
 	 */
 	public Tree(int s, Tree p){
-		size = s;
 		left = null;
 		right = null;
-		lp = null;
+		size = s;
 		sizeLeft = size;
+		lp = null;
 		parent = p;
+	}
+	
+	public Tree getLeft() {
+		return left;
+	}
+	
+	public void setLeft(Tree left) {
+		this.left = left;
+	}
+	
+	public Tree getRight() {
+		return right;
+	}
+	
+	public void setRight(Tree right) {
+		this.right = right;
+	}
+	
+	public int getSize() {
+		return size;
+	}
+	
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
+	public int getSizeLeft() {
+		return sizeLeft;
+	}
+	
+	public void setSizeLeft(int sizeLeft) {
+		this.sizeLeft = sizeLeft;
+	}
+	
+	public Process getLp() {
+		return lp;
+	}
+	
+	public void setLp(Process lp) {
+		this.lp = lp;
+	}
+	
+	public Tree getParent(){
+		return parent;
+	}
+	
+	public void setParent(Tree parent) {
+		this.parent = parent;
 	}
 
 	/**
@@ -77,14 +125,6 @@ public class Tree {
 			System.out.println("There is no more room in the tree");
 			return null;
 		}
-	}
-
-	/**
-	 * 
-	 * @return -the size left in the node
-	 */
-	public int getSizeLeft(){
-		return sizeLeft;
 	}
 
 	/**
@@ -192,37 +232,6 @@ public class Tree {
 	public boolean areNoChildren()
 	{
 		return left == null;
-	}
-
-	public Tree getLeft() {
-		return left;
-	}
-	public void setLeft(Tree left) {
-		this.left = left;
-	}
-	public Tree getRight() {
-		return right;
-	}
-	public void setRight(Tree right) {
-		this.right = right;
-	}
-	public int getSize() {
-		return size;
-	}
-	public void setSize(int size) {
-		this.size = size;
-	}
-	public Process getLp() {
-		return lp;
-	}
-	public void setLp(Process lp) {
-		this.lp = lp;
-	}
-	public void setParent(Tree parent) {
-		this.parent = parent;
-	}
-	public Tree getParent(){
-		return parent;
 	}
 
 	/* (non-Javadoc)
