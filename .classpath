@@ -2,10 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/Ryan/Downloads/eclipse-java-luna-SR1a-win32-x86_64/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://junit-team.github.io/junit/javadoc/latest/"/>
 		</attributes>
 	</classpathentry>
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+>>>>>>> branch 'master' of https://github.com/stumpr73/osproject.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>
