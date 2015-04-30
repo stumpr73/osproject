@@ -1,19 +1,34 @@
 package MemoryManagement;
 
 public class MMDriver {
+	
 	public static void main(String args[])
 	{
-		/**
-		Tree tree = new Tree(64, null);
-		Process p = new Process(32, "Process A");
+		MemoryManager mm = new MemoryManager(64);
 		Process p2 = new Process(16, "Process B");
-		tree.allocate(p);
-		tree.allocate(p2);
-		tree.deallocate(p2);
-		tree.deallocate(p);
-		*
-		*/
-		TreeTest treeTest = new TreeTest();
-		ProcessTest processTest = new ProcessTest();
+		Process p = new Process(8, "Process A");
+		Process p3 = new Process(16, "Process C");
+		
+		
+		mm.allocate(p2);
+		mm.allocate(p);
+		mm.allocate(p3);
+		
+		
+		System.out.println(mm.toString());
+		
+		mm.deallocate(p3);
+		mm.deallocate(p2);
+		//mm.deallocate(p);
+		
+		//mm.allocate(new Process(64, "Process D"));
+		//mm.allocate(p3);
+		
+		System.out.println(mm.toString());
+		
+		System.out.println("Stop");
 	}
+	
+
+
 }
