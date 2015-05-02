@@ -243,7 +243,38 @@ public class TreeTest
     @Test
     public void testUpdateParentSize()
     {
+        // Set up the tree and test sizeLefts'.
+        t1.generateChildren();
+        t1.getLeft().generateChildren();
+        assertEquals(64, t1.getSizeLeft());
+        assertEquals(32, t1.getLeft().getSizeLeft());
+        assertEquals(32, t1.getRight().getSizeLeft());
+        assertEquals(16, t1.getLeft().getLeft().getSizeLeft());
+        assertEquals(16, t1.getLeft().getRight().getSizeLeft());
         
+        // Test 1
+        t1.getLeft().getLeft().updateParentSize(16);
+        assertEquals(48, t1.getSizeLeft());
+        assertEquals(16, t1.getLeft().getSizeLeft());
+        assertEquals(32, t1.getRight().getSizeLeft());
+        assertEquals(0, t1.getLeft().getLeft().getSizeLeft());
+        assertEquals(16, t1.getLeft().getRight().getSizeLeft());
+        
+        // Test 2
+        t1.getLeft().getRight().updateParentSize(16);
+        assertEquals(32, t1.getSizeLeft());
+        assertEquals(0, t1.getLeft().getSizeLeft());
+        assertEquals(32, t1.getRight().getSizeLeft());
+        assertEquals(0, t1.getLeft().getLeft().getSizeLeft());
+        assertEquals(0, t1.getLeft().getRight().getSizeLeft());
+        
+        // Test 3
+        t1.getRight().updateParentSize(32);
+        assertEquals(0, t1.getSizeLeft());
+        assertEquals(0, t1.getLeft().getSizeLeft());
+        assertEquals(0, t1.getRight().getSizeLeft());
+        assertEquals(0, t1.getLeft().getLeft().getSizeLeft());
+        assertEquals(0, t1.getLeft().getRight().getSizeLeft());
     }
 
     @Test
