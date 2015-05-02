@@ -38,7 +38,7 @@ public class MemoryManager {
 		leaves.remove(t);
 		if(t.getParent().getRight() == null && t.getParent().getLeft() == null)
 			leaves.add(t.getParent());
-		t.setProcess(null);
+		t.setLp(null);
 		t = null;
 		tree.deallocate();
 	}
