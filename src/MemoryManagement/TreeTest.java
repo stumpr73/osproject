@@ -201,12 +201,37 @@ public class TreeTest
     @Test
     public void testFindSuitableChild()
     {
+        // Set up processes and the tree.
         Process p1 = new Process(32, "Process A");
-        Process p2 = new Process(16, "Process B");
+        Process p2 = new Process(32, "Process B");
         Process p3 = new Process(16, "Process C");
-        Process p4 = new Process(8, "Process D");
+        Tree suitable;
         t1.generateChildren();
-        t1.getRight().generateChildren();
+
+        // Test
+        suitable = t1.getLeft();
+        assertEquals(null, t1.getLeft().getLp());
+        assertEquals(suitable, t1.findSuitableChild(p1));
+
+        // Add process and change the sizes.
+        t1.getLeft().setLp(p1);
+        t1.getLeft().setSizeLeft(0);
+        t1.setSizeLeft(32);
+
+        // Test
+        suitable = t1.getRight();
+        assertEquals(null, t1.getRight().getLp());
+        assertEquals(suitable, t1.findSuitableChild(p2));
+
+        // Add process and change the sizes.
+        t1.getRight().setLp(p2);
+        t1.getRight().setSizeLeft(0);
+        t1.setSizeLeft(0);
+
+        // Test
+        suitable = null;
+        assertNotNull(t1.getRight().getLp());
+        assertEquals(suitable, t1.findSuitableChild(p3));
     }
     
     @Test
