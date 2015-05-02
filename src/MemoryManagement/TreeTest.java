@@ -237,7 +237,31 @@ public class TreeTest
     @Test
     public void testAssignProcess()
     {
+        // Set up tree and process.
+        Process p1 = new Process(16, "Process A");
+        Process p2 = new Process(32, "Process B");
+        t1.generateChildren();
+        t1.getLeft().generateChildren();
         
+        //Test 1
+        assertEquals(null, t1.getLeft().getLeft().getLp());
+        t1.getLeft().getLeft().assignProcess(p1);
+        assertEquals(p1, t1.getLeft().getLeft().getLp());
+        assertEquals(48, t1.getSizeLeft());
+        assertEquals(16, t1.getLeft().getSizeLeft());
+        assertEquals(32, t1.getRight().getSizeLeft());
+        assertEquals(0, t1.getLeft().getLeft().getSizeLeft());
+        assertEquals(16, t1.getLeft().getRight().getSizeLeft());
+        
+        // Test 2
+        assertEquals(null, t1.getRight().getLp());
+        t1.getRight().assignProcess(p2);
+        assertEquals(p2, t1.getRight().getLp());
+        assertEquals(16, t1.getSizeLeft());
+        assertEquals(16, t1.getLeft().getSizeLeft());
+        assertEquals(0, t1.getRight().getSizeLeft());
+        assertEquals(0, t1.getLeft().getLeft().getSizeLeft());
+        assertEquals(16, t1.getLeft().getRight().getSizeLeft());
     }
     
     @Test
