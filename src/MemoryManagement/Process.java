@@ -3,6 +3,9 @@ package MemoryManagement;
 
 
 
+
+
+
 public class Process {
 	
 	int size;

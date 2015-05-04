@@ -21,7 +21,7 @@ public class ProcessTest
     public ProcessTest()
     {
     }
- 
+
     /**
      * Sets up the test fixture.
      *
@@ -71,6 +71,5 @@ public class ProcessTest
         assertEquals("Process B", p1.getName());
     }
 }
-
 
 

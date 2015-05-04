@@ -3,45 +3,32 @@ package MemoryManagement;
 import java.util.ArrayList;
 
 public class MemoryManager {
-
-	Tree tree;
-	int maxSize;
-	ArrayList<Tree> leaves;
+//chasdf
+	private TreeManager treeManager;
+	private ArrayList<Tree> leaves;
 	
-	public MemoryManager(int maxSize)
+	public MemoryManager()
 	{
-		this.maxSize = maxSize;
 		leaves = new ArrayList<Tree>();
-		tree = new Tree(maxSize, null, 0, leaves);
+		treeManager = new TreeManager(64, leaves);
 	}
 	
 	public void allocate(Process p)
 	{
-		tree.allocate(p);
+		treeManager.allocate(p);
 	}
 	
 	public void deallocate(Process p)
 	{
-		Tree t = null;
-		for(int i = 0; i < leaves.size(); i++)
-		{
-			if(leaves.get(i).getLp() == null)
-				;
-			else if(leaves.get(i).getLp().getName() == p.getName())
-				t = leaves.get(i);
-		}
+		treeManager.deallocate(p);
 		
-		if(t == null)
-		{
-			return;
-		}
-		leaves.remove(t);
-		if(t.getParent().getRight() == null && t.getParent().getLeft() == null)
-			leaves.add(t.getParent());
-		t.setLp(null);
-		t = null;
-		tree.deallocate();
 	}
+	
+	public ArrayList<Tree> getProcesses()
+	{
+		return leaves;
+	}
+	
 	public String toString()
 	{
 		return leaves.toString();

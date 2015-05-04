@@ -1,10 +1,14 @@
 package MemoryManagement;
 
+
+
+
+
 public class MMDriver {
 	
 	public static void main(String args[])
 	{
-		MemoryManager mm = new MemoryManager(64);
+		MemoryManager mm = new MemoryManager();
 		Process p2 = new Process(16, "Process B");
 		Process p = new Process(8, "Process A");
 		Process p3 = new Process(16, "Process C");
