@@ -43,13 +43,8 @@ public class MemoryManager {
 	}
 
 	/**
-	 * @return The leaves of the tree
+	 * Returns the information about the leaves
 	 */
-	public ArrayList<Tree> getProcesses()
-	{
-		return leaves;
-	}
-
 	public String toString()
 	{
 		return leaves.toString();
