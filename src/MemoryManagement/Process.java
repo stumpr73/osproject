@@ -1,23 +1,20 @@
 package MemoryManagement;
 
-
-
-
-
-
-
 public class Process {
-	
 	int size;
 	String name;
 
+	/**
+	 * Constructor
+	 * @param size Size of the process
+	 * @param name Name of the process
+	 */
 	public Process(int size, String name) {
 		super();
 		this.size = size;
 		this.name = name;
 	}
-	
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -36,18 +33,34 @@ public class Process {
 			return false;
 		return true;
 	}
+
+	/**
+	 * @return Size of the process
+	 */
 	public int getSize() {
 		return size;
 	}
+
+	/**
+	 * Sets the size of the process
+	 * @param size Size of the process
+	 */
 	public void setSize(int size) {
 		this.size = size;
 	}
+
+	/**
+	 * @return The name of the process
+	 */
 	public String getName() {
 		return name;
 	}
+
+	/**
+	 * Sets the name of the process
+	 * @param name The name of the process
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-
 }
