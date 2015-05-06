@@ -1,32 +1,20 @@
 package MemoryManagement;
 
 import java.util.ArrayList;
+//deallocate commit
 
-/**
- * This class does the majority of the work in our project.
- * The grunt work of allocating a space in memory for a new process
- * is in this class.  Efficient ways to traverse through this tree
- * are used.
- */
-public class Tree extends TreeTest {
+public class Tree {
 
-	private Tree left; // left child of this node
-	private Tree right; // right child of this node
-	private int size; // size of the node
+	private Tree left;
+	private Tree right;
+	private int size;
 	private int sizeLeft; //the available space underneath this node
-	private Process lp; // the local process of this node
-	private Tree parent; // the parent of this node
-	private int lowEnd; // the number in memory where this node begins
-	private ArrayList<Tree> leaves; 
+	private Process lp;
+	private Tree parent;
+	private int lowEnd;
+	private ArrayList<Tree> leaves;
+	
 
-	/**
-	 * Constructor
-	 * 
-	 * @param s Size of the node
-	 * @param p  Parent of the node
-	 * @param lowEnd The number in memory where this node will begin
-	 * @param leaves  
-	 */
 	public Tree(int s, Tree p, int lowEnd, ArrayList<Tree> leaves){
 		size = s;
 		left = null;
@@ -38,14 +26,8 @@ public class Tree extends TreeTest {
 		this.leaves = leaves;
 		leaves.add(this);
 	}
-
-	/**
-	 * This method allocates a place in memory for the process P.
-	 * If the size of the process is larger than the amount of
-	 * memory left, an error message will be displayed.
-	 * 
-	 * @param p The process being placed in memory
-	 */
+	
+	
 	public void allocate(Process p){
 		Tree c = null;
 		if(p.getSize()<= size/2){
@@ -63,22 +45,14 @@ public class Tree extends TreeTest {
 		else
 			System.out.println("Cannot fit");
 	}
+	
 
-	/**
-	 * Generates the children of this node
-	 */
-	protected void generateChildren(){
+	public void generateChildren(){
 		leaves.remove(this);
 		left = new Tree(size/2,this, lowEnd, leaves);
 		right = new Tree(size/2,this, (lowEnd +(size/2)), leaves);
 	}
-
-	/**
-	 * Finds a suitable node that a process can be placed
-	 * @param p The process trying to be placed in memory
-	 * @return  Either the left child or right child
-	 */
-	protected Tree findSuitableChild(Process p){
+	public Tree findSuitableChild(Process p){
 		if(left.getSizeLeft() >= p.getSize() && left.getLp() == null)
 			return left;
 		else if(right.getSizeLeft() >= p.getSize() && right.getLp() ==null)
@@ -89,24 +63,35 @@ public class Tree extends TreeTest {
 			return null;
 		}
 	}
+	
+	public Tree getSibling()
+	{
+		if(parent.getLeft().equals(this))
+			return parent.getRight();
+		else if(parent.getRight().equals(this))
+			return parent.getLeft();
+		else
+			return null;
+		
+	}
 
+	public int getSizeLeft(){
+		return sizeLeft;
+	}
+	
 	/**
-	 * Assigns the process to this node
+	 * 
 	 * @param p
 	 */
-	protected void assignProcess(Process p){
+	public void assignProcess(Process p){
 		int adjustedSize = (int)Math.pow(2,Math.ceil(Math.log(p.getSize())/Math.log(2)));
 		lp = p;
 		updateParentSize(adjustedSize);
+		
+		//System.out.println("The " + p.getName() + " was assigned to a node with size " + size);
 	}
-
-	/**
-	 * When a process is either added or removed in memory
-	 * The size left underneath this parent needs to be updated
-	 * @param s The size of the process that was either removed
-	 * or added to memory
-	 */
-	protected void updateParentSize(int s)
+	
+	public void updateParentSize(int s)
 	{
 		if(parent != null)
 		{
@@ -118,157 +103,63 @@ public class Tree extends TreeTest {
 			sizeLeft = sizeLeft - s;
 		}
 	}
-
-	/**
-	 * @return The sibling of the node
-	 */
-	protected Tree getSibling()
+	
+	public int getLowEnd()
 	{
-		if(parent.getLeft().equals(this))
-			return parent.getRight();
-		else if(parent.getRight().equals(this))
-			return parent.getLeft();
-		else
-			return null;
+		return lowEnd;
 	}
 
-	/**
-	 * Resets the children of this node
-	 */
-	protected void resetChildren()
+
+	public void resetChildren()
 	{
 		left = null;
 		right = null;
+		
 	}
 
-	/**
-	 * 
-	 * @return  If this node has a parent
-	 */
-	protected boolean hasParent()
+	public boolean hasParent()
 	{
 		if(parent == null)
 			return false;
 		return true;
 	}
-
-	/**
-	 * 
-	 * @return If there are no children
-	 */
-	protected boolean areNoChildren()
+	
+	public Tree getParent()
+	{
+		return parent;
+	}
+	
+	public boolean areNoChildren()
 	{
 		return left == null;
 	}
 
-	/**
-	 * 
-	 * @return The left child
-	 */
-	protected Tree getLeft() {
+	public Tree getLeft() {
 		return left;
 	}
-
-	/**
-	 * Sets the left child
-	 * @param left
-	 */
-	protected void setLeft(Tree left) {
+	public void setLeft(Tree left) {
 		this.left = left;
 	}
-
-	/**
-	 * Sets the size left under the node
-	 * @param size The new size left under the node
-	 */
-	protected void setSizeLeft(int size){
-		sizeLeft = size;
-	}
-
-	/**
-	 * 
-	 * @return The right child
-	 */
-	protected Tree getRight() {
+	public Tree getRight() {
 		return right;
 	}
-
-	/**
-	 * Sets the right child to the parameter right
-	 * @param right
-	 */
-	protected void setRight(Tree right) {
+	public void setRight(Tree right) {
 		this.right = right;
 	}
-
-	/**
-	 * @return The size of this node
-	 */
-	protected int getSize() {
+	public int getSize() {
 		return size;
 	}
-
-	/**
-	 * Sets the size of this node
-	 * @param size
-	 */
-	protected void setSize(int size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
-
-	/**
-	 * Returns the process occupying this node
-	 * @return
-	 */
-	protected Process getLp() {
+	public Process getLp() {
 		return lp;
 	}
-
-	/**
-	 * Sets the process occupying this node
-	 * @param lp
-	 */
-	protected void setLp(Process lp) {
+	public void setLp(Process lp) {
 		this.lp = lp;
 	}
-
-	/**
-	 * Sets the parent occupying this node
-	 * @param parent
-	 */
-	protected void setParent(Tree parent) {
+	public void setParent(Tree parent) {
 		this.parent = parent;
-	}
-
-	/**
-	 * Sets where the node begins in memory
-	 * @param n	Where the node will begin in memory
-	 */
-	protected void setLowEnd(int n){
-		lowEnd = n;
-	}
-
-	/**
-	 * @return Where this node begins in memory
-	 */
-	protected int getLowEnd()
-	{
-		return lowEnd;
-	}
-
-	/**
-	 * @return The amount of memory underneath this node that is not taken up
-	 */
-	protected int getSizeLeft(){
-		return sizeLeft;
-	}
-
-	/**
-	 * @return The parent of the node
-	 */
-	protected Tree getParent()
-	{
-		return parent;
 	}
 
 	/* (non-Javadoc)
@@ -286,8 +177,8 @@ public class Tree extends TreeTest {
 		if (left == null) {
 			if (other.left != null)
 				return false;
-		} else if (!left.equals(other.left))
-			return false;
+		} //else if (!left.equals(other.left))
+			//return false;
 		if (lp == null) {
 			if (other.lp != null)
 				return false;
@@ -309,14 +200,13 @@ public class Tree extends TreeTest {
 			return false;
 		return true;
 	}
-
-	/**
-	 * Returns the information about the node
-	 */
+	
 	public String toString()
 	{
 		if(lp != null)
 			return lp.getName() + " of size " + size + " Range: " + lowEnd + " to "+ (lowEnd + size -1) + "\n";
 		return "Size: " + size + " Range: " + lowEnd + " to "+ (lowEnd + size -1) + "\n";
 	}
+
+
 }
