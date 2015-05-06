@@ -92,7 +92,7 @@ public class Display extends JFrame
     @Override
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
-
+//
         if (source == allocate) {
         	try{
         		int remainingSize = 64;
