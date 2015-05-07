@@ -321,9 +321,9 @@ public class TreeTest
 		Process p2 = new Process(16, "Process B");
 		t1.allocate(p1);
 		t1.allocate(p2);
-		t1.deallocate();
+		//t1.deallocate();
 		assertNull(t1.getLeft().getLp());
-		t1.deallocate();
+		//t1.deallocate();
 		assertNull(t1.getLeft());
 		assertNull(t1.getRight());
 	}
