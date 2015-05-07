@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *	When a process is deallocated, buddy empty spaces of memory
  *	are checked
  */
-public class TreeManager extends TreeTest {
+public class TreeManager {
 	private Tree tree;
 	private ArrayList<Tree> leaves;
 
@@ -83,12 +83,15 @@ public class TreeManager extends TreeTest {
 			leaves.remove(t.getSibling());
 			leaves.remove(t);
 			t.getParent().resetChildren();
-			if(t.getParent() != null)
+			if(t.getParent() != null){
+				t.updateParentSize(-1*t.getSize());
 				maintainTree(t.getParent());
+			}
 		}
 		else
 		{
 			t.setLp(null);
+			t.updateParentSize(-1*t.getSize());
 
 		}
 	}

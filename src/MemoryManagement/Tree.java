@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * is in this class.  Efficient ways to traverse through this tree
  * are used.
  */
-public class Tree extends TreeTest {
+public class Tree{
 
 	private Tree left;
 	private Tree right;
