@@ -300,6 +300,16 @@ public class TreeTest
 		assertEquals(0, t1.getLeft().getLeft().getSizeLeft());
 		assertEquals(0, t1.getLeft().getRight().getSizeLeft());
 	}
+	
+	@Test
+    	public void testGetSibling()
+    	{
+        	t1.generateChildren();
+        	assertNotNull(t1.getLeft());
+        	assertNotNull(t1.getRight());
+        	Tree t2 = t1.getLeft();
+        	assertEquals(t1.getRight(), t2.getSibling());
+    	}
 
 	@Test
 	public void testAllocate()
@@ -312,19 +322,5 @@ public class TreeTest
 		t1.allocate(p2);
 		assertNotNull(t1.getRight().getLeft());
 		assertEquals(p2, t1.getRight().getLeft().getLp());
-	}
-
-	@Test
-	public void testDeallocate()
-	{
-		Process p1 = new Process(32, "Process A");
-		Process p2 = new Process(16, "Process B");
-		t1.allocate(p1);
-		t1.allocate(p2);
-		//t1.deallocate();
-		assertNull(t1.getLeft().getLp());
-		//t1.deallocate();
-		assertNull(t1.getLeft());
-		assertNull(t1.getRight());
 	}
 }
