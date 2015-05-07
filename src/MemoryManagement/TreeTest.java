@@ -300,16 +300,16 @@ public class TreeTest
 		assertEquals(0, t1.getLeft().getLeft().getSizeLeft());
 		assertEquals(0, t1.getLeft().getRight().getSizeLeft());
 	}
-	
+
 	@Test
-    	public void testGetSibling()
-    	{
-        	t1.generateChildren();
-        	assertNotNull(t1.getLeft());
-        	assertNotNull(t1.getRight());
-        	Tree t2 = t1.getLeft();
-        	assertEquals(t1.getRight(), t2.getSibling());
-    	}
+	public void testGetSibling()
+	{
+		t1.generateChildren();
+		assertNotNull(t1.getLeft());
+		assertNotNull(t1.getRight());
+		Tree t2 = t1.getLeft();
+		assertEquals(t1.getRight(), t2.getSibling());
+	}
 
 	@Test
 	public void testAllocate()
